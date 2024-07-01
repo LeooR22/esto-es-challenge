@@ -24,6 +24,11 @@ import { Input } from "@/components/ui/input";
 import { persons } from "@/constants/persons";
 import { statusOptions } from "@/constants/statusOptions";
 import { useRouter } from "next/navigation";
+import { FC } from "react";
+
+interface Props {
+  initialData?: IProject;
+}
 
 const formSchema = z.object({
   projectName: z.string().min(2, {
@@ -41,7 +46,7 @@ const formSchema = z.object({
   }),
 });
 
-export function ProjectForm() {
+export const ProjectForm: FC<Props> = ({ initialData }) => {
   const router = useRouter();
 
   const employees = persons.filter((person) => person.role === "Employee");
@@ -50,41 +55,47 @@ export function ProjectForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      projectName: "",
-      description: "",
-      projectManager: "",
-      assignedTo: "",
-      status: statusOptions[0].value,
+      projectName: initialData?.projectName || "",
+      description: initialData?.description || "",
+      projectManager: initialData?.projectManager || "",
+      assignedTo: initialData?.assignedTo || "",
+      status: initialData?.status || statusOptions[0].value,
     },
   });
 
-  // 2. Define a submit handler.
+  // 2. Define a submit handle  r.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    // console.log(values);
+    let project = {} as Partial<IProject>;
 
-    const project = {
-      ...values,
-      id: uuidv4(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    if (initialData) {
+      project = {
+        ...initialData,
+        ...values,
+        updatedAt: new Date().toISOString(),
+      };
+    } else {
+      project = {
+        ...values,
+        id: uuidv4(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+    }
 
-    console.log(project);
-
-    // save form values in local storage
-
-    // 1st check if there is any data in local storage
-
-    // if not, create an empty array
     const projects = JSON.parse(localStorage.getItem("projects") || "[]");
 
-    // add the new project to the array
-    projects.push(project);
+    if (initialData) {
+      const updatedProjects = projects.filter(
+        (item: IProject) => item.id !== initialData.id
+      );
 
-    // save the array back to local storage
-    localStorage.setItem("projects", JSON.stringify(projects));
+      const projectsToSave = [project, ...updatedProjects];
+
+      localStorage.setItem("projects", JSON.stringify(projectsToSave));
+    } else {
+      const projectsToSave = [project, ...projects];
+      localStorage.setItem("projects", JSON.stringify(projectsToSave));
+    }
 
     // redirect to the projects page
     router.push("/backoffice/my-projects");
@@ -94,6 +105,27 @@ export function ProjectForm() {
     <div className="container max-w-screen-sm mx-auto py-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {initialData && (
+            <>
+              <FormField
+                name="id"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project ID*</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="An awesome new project"
+                        {...field}
+                        value={initialData.id}
+                        disabled
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
+          )}
           <FormField
             control={form.control}
             name="projectName"
@@ -205,10 +237,10 @@ export function ProjectForm() {
             )}
           />
           <Button variant={"destructive"} type="submit">
-            Create project
+            {initialData ? "Update project" : "Create project"}
           </Button>
         </form>
       </Form>
     </div>
   );
-}
+};
