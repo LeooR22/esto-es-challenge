@@ -38,7 +38,23 @@ const formSchema = z.object({
 });
 
 export function ProjectForm() {
-  // 1. Define your form.
+  const statusOptions = [
+    { value: "Enabled", label: "Enabled" },
+    { value: "Disabled", label: "Disabled" },
+  ];
+
+  const persons = [
+    { name: "Maria K. Dougherty", role: "Employee" },
+    { name: "Ira M. Huntington", role: "Employee" },
+    { name: "Katheryn R. Pyburn", role: "Employee" },
+    { name: "Walt Cosani", role: "Manager" },
+    { name: "Jhon Doe", role: "Manager" },
+    { name: "Susan Purcell", role: "Manager" },
+  ];
+
+  const employees = persons.filter((person) => person.role === "Employee");
+  const managers = persons.filter((person) => person.role === "Manager");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -103,9 +119,11 @@ export function ProjectForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="Walt Cosani">Walt Cosani</SelectItem>
-                    <SelectItem value="Jhon Doe">Jhon Doe</SelectItem>
-                    <SelectItem value="Susan Purcell">Susan Purcell</SelectItem>
+                    {managers.map((manager) => (
+                      <SelectItem key={manager.name} value={manager.name}>
+                        {manager.name} | {manager.role}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
 
@@ -129,15 +147,11 @@ export function ProjectForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="Maria K. Dougherty">
-                      Maria K. Dougherty
-                    </SelectItem>
-                    <SelectItem value="Ira M. Huntington">
-                      Ira M. Huntington
-                    </SelectItem>
-                    <SelectItem value="Katheryn R. Pyburn">
-                      Katheryn R. Pyburn
-                    </SelectItem>
+                    {employees.map((employee) => (
+                      <SelectItem key={employee.name} value={employee.name}>
+                        {employee.name} | {employee.role}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
 
@@ -161,8 +175,11 @@ export function ProjectForm() {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="Enabled">Enabled</SelectItem>
-                    <SelectItem value="Disabled">Disabled</SelectItem>
+                    {statusOptions.map((status) => (
+                      <SelectItem key={status.value} value={status.value}>
+                        {status.label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
 
@@ -171,7 +188,7 @@ export function ProjectForm() {
             )}
           />
           <Button variant={"destructive"} type="submit">
-            Create Project
+            Create project
           </Button>
         </form>
       </Form>
