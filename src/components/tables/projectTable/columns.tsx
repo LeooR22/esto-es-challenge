@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 export const columns: ColumnDef<IProject>[] = [
   {
@@ -54,9 +55,13 @@ export const columns: ColumnDef<IProject>[] = [
     accessorKey: "Action",
     enableHiding: false,
     cell: ({ row }: { row: any }) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const router = useRouter();
       const projectId = row.original.id;
 
-      console.log({ projectId });
+      const handleGoToEditPage = () => {
+        router.push(`/backoffice/my-projects/edit-project/${projectId}`);
+      };
 
       return (
         <DropdownMenu>
@@ -68,9 +73,7 @@ export const columns: ColumnDef<IProject>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => console.log("go to edit page", projectId)}
-            >
+            <DropdownMenuItem onClick={handleGoToEditPage}>
               Edit
             </DropdownMenuItem>
             <DropdownMenuSeparator />
