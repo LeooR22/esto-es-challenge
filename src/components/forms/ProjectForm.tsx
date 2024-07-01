@@ -20,6 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { persons } from "@/constants/persons";
+import { statusOptions } from "@/constants/statusOptions";
 
 const formSchema = z.object({
   projectName: z.string().min(2, {
@@ -38,20 +40,6 @@ const formSchema = z.object({
 });
 
 export function ProjectForm() {
-  const statusOptions = [
-    { value: "Enabled", label: "Enabled" },
-    { value: "Disabled", label: "Disabled" },
-  ];
-
-  const persons = [
-    { name: "Maria K. Dougherty", role: "Employee" },
-    { name: "Ira M. Huntington", role: "Employee" },
-    { name: "Katheryn R. Pyburn", role: "Employee" },
-    { name: "Walt Cosani", role: "Manager" },
-    { name: "Jhon Doe", role: "Manager" },
-    { name: "Susan Purcell", role: "Manager" },
-  ];
-
   const employees = persons.filter((person) => person.role === "Employee");
   const managers = persons.filter((person) => person.role === "Manager");
 
@@ -62,7 +50,7 @@ export function ProjectForm() {
       description: "",
       projectManager: "",
       assignedTo: "",
-      status: "Enabled",
+      status: statusOptions[0].value,
     },
   });
 
