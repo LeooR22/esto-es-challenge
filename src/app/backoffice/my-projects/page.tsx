@@ -1,5 +1,4 @@
 import { RedirectIconButton } from "@/components/RedirectIconButton";
-import { DataTableDemo } from "@/components/tables/ProjectTable";
 import ProjectTable from "@/components/tables/projectTable/project-table";
 import { PlusIcon } from "@/icons/PlusIcon";
 
