@@ -55,6 +55,7 @@ export function DataTable<TData, TValue>({
     onPaginationChange: setPagination, //update the pagination state when internal APIs mutate the pagination state
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+
     state: {
       pagination,
       columnFilters,

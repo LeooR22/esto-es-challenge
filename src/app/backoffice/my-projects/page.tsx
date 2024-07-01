@@ -15,7 +15,6 @@ export default function Page() {
         />
       </div>
       <div className="container max-w-screen-2xl mx-auto py-4">
-        {/* <DataTableDemo /> */}
         <ProjectTable />
       </div>
     </div>

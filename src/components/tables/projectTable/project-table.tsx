@@ -1,12 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
+
+export const ProjectsContext = createContext({
+  deleteProjectById: (id: string) => {},
+});
 
 export default function ProjectTable() {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const deleteProjectById = (id: string) => {
+    const updatedProjects = projects.filter(
+      (project: IProject) => project.id !== id
+    );
+    setProjects(updatedProjects);
+    localStorage.setItem("projects", JSON.stringify(updatedProjects));
+  };
 
   useEffect(() => {
     const projects =
@@ -22,7 +34,9 @@ export default function ProjectTable() {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <DataTable columns={columns} data={projects} />
+        <ProjectsContext.Provider value={{ deleteProjectById }}>
+          <DataTable columns={columns} data={projects} />
+        </ProjectsContext.Provider>
       )}
     </div>
   );

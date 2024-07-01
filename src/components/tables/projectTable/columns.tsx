@@ -13,6 +13,7 @@ import {
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { AlertDialogDemo } from "./delete-dialog";
 
 export const columns: ColumnDef<IProject>[] = [
   {
@@ -54,10 +55,11 @@ export const columns: ColumnDef<IProject>[] = [
     // id: "actions",
     accessorKey: "Action",
     enableHiding: false,
-    cell: ({ row }: { row: any }) => {
+    cell: ({ row }) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const router = useRouter();
       const projectId = row.original.id;
+      const projectName = row.original.projectName;
 
       const handleGoToEditPage = () => {
         router.push(`/backoffice/my-projects/edit-project/${projectId}`);
@@ -77,11 +79,12 @@ export const columns: ColumnDef<IProject>[] = [
               Edit
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
+            {/* <DropdownMenuItem
               onClick={() => console.log("delete project", projectId)}
             >
               Delete
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
+            <AlertDialogDemo projectId={projectId} projectName={projectName} />
           </DropdownMenuContent>
         </DropdownMenu>
       );
