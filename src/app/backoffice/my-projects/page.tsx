@@ -1,4 +1,6 @@
 import { RedirectIconButton } from "@/components/RedirectIconButton";
+import { DataTableDemo } from "@/components/tables/ProjectTable";
+import ProjectTable from "@/components/tables/projectTable/project-table";
 import { PlusIcon } from "@/icons/PlusIcon";
 
 export default function Page() {
@@ -12,6 +14,10 @@ export default function Page() {
           variant={"destructive"}
           icon={<PlusIcon />}
         />
+      </div>
+      <div className="container max-w-screen-2xl mx-auto py-4">
+        {/* <DataTableDemo /> */}
+        <ProjectTable />
       </div>
     </div>
   );

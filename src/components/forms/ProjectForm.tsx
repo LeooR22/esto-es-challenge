@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { v4 as uuidv4 } from "uuid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { persons } from "@/constants/persons";
 import { statusOptions } from "@/constants/statusOptions";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   projectName: z.string().min(2, {
@@ -40,6 +42,8 @@ const formSchema = z.object({
 });
 
 export function ProjectForm() {
+  const router = useRouter();
+
   const employees = persons.filter((person) => person.role === "Employee");
   const managers = persons.filter((person) => person.role === "Manager");
 
@@ -58,7 +62,32 @@ export function ProjectForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    // console.log(values);
+
+    const project = {
+      ...values,
+      id: uuidv4(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    console.log(project);
+
+    // save form values in local storage
+
+    // 1st check if there is any data in local storage
+
+    // if not, create an empty array
+    const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+
+    // add the new project to the array
+    projects.push(project);
+
+    // save the array back to local storage
+    localStorage.setItem("projects", JSON.stringify(projects));
+
+    // redirect to the projects page
+    router.push("/backoffice/my-projects");
   }
 
   return (
