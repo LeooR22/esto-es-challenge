@@ -14,6 +14,7 @@ import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { DeleteDialog } from "./delete-dialog";
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<IProject>[] = [
   {
@@ -50,6 +51,19 @@ export const columns: ColumnDef<IProject>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    cell: ({ row }) => {
+      const status = row.original.status;
+
+      return (
+        <>
+          {status === "Enabled" ? (
+            <Badge>{status}</Badge>
+          ) : (
+            <Badge variant={"destructive"}>{status}</Badge>
+          )}
+        </>
+      );
+    },
   },
   {
     // id: "actions",

@@ -26,12 +26,14 @@ import { getInitials } from "@/utils/getInitials";
 import { getRandomAvatarColor } from "@/utils/getRandomAvatarColor";
 import { getLocaleDateString } from "@/utils/getLocaleDateString";
 
+import { Badge } from "@/components/ui/badge";
+
 interface Props {
   project: IProject;
 }
 
 export const ProjectCard: React.FC<Props> = ({ project }) => {
-  const { projectName, id, assignedTo, createdAt } = project;
+  const { projectName, id, assignedTo, createdAt, status } = project;
   const router = useRouter();
 
   const handleGoToEditPage = () => {
@@ -43,7 +45,14 @@ export const ProjectCard: React.FC<Props> = ({ project }) => {
     <Card className="bg-gray-100 dark:bg-gray-800">
       <CardHeader className="flex flex-row justify-between ">
         <div>
-          <CardTitle>{projectName}</CardTitle>
+          <CardTitle className="flex flex-row justify-between items-center mb-1">
+            <p>{projectName}</p>
+            {status === "Enabled" ? (
+              <Badge>{status}</Badge>
+            ) : (
+              <Badge variant={"destructive"}>{status}</Badge>
+            )}
+          </CardTitle>
           <CardDescription>{`Creation date: ${getLocaleDateString(
             createdAt
           )}`}</CardDescription>

@@ -15,7 +15,7 @@ export const ProjectList: FC<Props> = ({ isLoading, projects }) => {
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
   const filteredData = data.filter((project) =>
     project.projectName.toLowerCase().includes(filter.toLowerCase())
