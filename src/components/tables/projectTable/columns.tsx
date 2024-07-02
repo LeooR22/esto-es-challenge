@@ -13,7 +13,7 @@ import {
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { AlertDialogDemo } from "./delete-dialog";
+import { DeleteDialog } from "./delete-dialog";
 
 export const columns: ColumnDef<IProject>[] = [
   {
@@ -79,12 +79,8 @@ export const columns: ColumnDef<IProject>[] = [
               Edit
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            {/* <DropdownMenuItem
-              onClick={() => console.log("delete project", projectId)}
-            >
-              Delete
-            </DropdownMenuItem> */}
-            <AlertDialogDemo projectId={projectId} projectName={projectName} />
+
+            <DeleteDialog projectId={projectId} projectName={projectName} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

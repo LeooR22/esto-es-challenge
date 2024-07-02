@@ -1,4 +1,5 @@
 "use client";
+import { FC, useContext } from "react";
 
 import {
   AlertDialog,
@@ -12,15 +13,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { FC, useContext } from "react";
-import { ProjectsContext } from "./project-table";
+import { ProjectsContext } from "@/app/backoffice/my-projects/page";
 
 interface Props {
   projectId: string;
   projectName: string;
 }
 
-export const AlertDialogDemo: FC<Props> = ({ projectId, projectName }) => {
+export const DeleteDialog: FC<Props> = ({ projectId, projectName }) => {
   let { deleteProjectById } = useContext(ProjectsContext);
 
   const handleDelete = () => {
