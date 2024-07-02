@@ -23,6 +23,7 @@ import { DotsVerticalIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { DeleteDialog } from "../projectTable/delete-dialog";
 import { useRouter } from "next/navigation";
+import { DeleteProjectResponsiveMoDal } from "@/components/modal/DeleteProjectResponsiveMoDal";
 
 interface Props {
   projects: IProject[];
@@ -121,7 +122,7 @@ export const DataTable: FC<Props> = ({ projects, deleteProjectById }) => {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
 
-                  <DeleteDialog
+                  <DeleteProjectResponsiveMoDal
                     projectId={project.id}
                     projectName={project.projectName}
                     deleteProjectById={deleteProjectById}

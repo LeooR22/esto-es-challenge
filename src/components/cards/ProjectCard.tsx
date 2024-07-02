@@ -27,6 +27,7 @@ import { getRandomAvatarColor } from "@/utils/getRandomAvatarColor";
 import { getLocaleDateString } from "@/utils/getLocaleDateString";
 
 import { Badge } from "@/components/ui/badge";
+import { DeleteProjectResponsiveMoDal } from "../modal/DeleteProjectResponsiveMoDal";
 
 interface Props {
   project: IProject;
@@ -45,7 +46,6 @@ export const ProjectCard: React.FC<Props> = ({
   };
 
   return (
-    // <Card className="w-[350px]">
     <Card className="bg-gray-100 dark:bg-gray-800">
       <CardHeader className="flex flex-row justify-between ">
         <div>
@@ -76,7 +76,7 @@ export const ProjectCard: React.FC<Props> = ({
             </DropdownMenuItem>
             <DropdownMenuSeparator />
 
-            <DeleteDialog
+            <DeleteProjectResponsiveMoDal
               projectId={id}
               projectName={projectName}
               deleteProjectById={deleteProjectById}
