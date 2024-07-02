@@ -1,4 +1,8 @@
 export const getInitials = function (fullName: string) {
+  if (!fullName) {
+    return "";
+  }
+
   var names = fullName.split(" "),
     initials = names[0].substring(0, 1).toUpperCase();
 

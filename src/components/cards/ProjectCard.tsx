@@ -78,17 +78,20 @@ export const ProjectCard: React.FC<Props> = ({ project }) => {
 
       <CardFooter className="gap-2">
         <Avatar>
-          <AvatarImage src="" alt={assignedTo} />
+          <AvatarImage
+            src={assignedTo.avatarImageUrl}
+            alt={`${assignedTo.name} profile photo`}
+          />
           <AvatarFallback
             className="text-white"
             style={{
-              backgroundColor: getRandomAvatarColor(),
+              backgroundColor: assignedTo.avatarColor || getRandomAvatarColor(),
             }}
           >
-            {getInitials(assignedTo)}
+            {getInitials(assignedTo.name)}
           </AvatarFallback>
         </Avatar>
-        {assignedTo}
+        {assignedTo.name}
       </CardFooter>
     </Card>
   );

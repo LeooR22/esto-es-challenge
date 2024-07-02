@@ -10,11 +10,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { DeleteDialog } from "./delete-dialog";
 import { Badge } from "@/components/ui/badge";
+import { getInitials } from "@/utils/getInitials";
+import { getRandomAvatarColor } from "@/utils/getRandomAvatarColor";
 
 export const columns: ColumnDef<IProject>[] = [
   {
@@ -43,10 +47,50 @@ export const columns: ColumnDef<IProject>[] = [
   {
     accessorKey: "projectManager",
     header: "Project Manager",
+    cell: ({ row }) => {
+      const projectManager = row.original.projectManager;
+
+      return (
+        <div className="flex flex-rom items-center">
+          <Avatar>
+            <AvatarImage
+              src={projectManager.avatarImageUrl}
+              alt={`${projectManager.name} profile photo`}
+            />
+            <AvatarFallback>{getInitials(projectManager.name)}</AvatarFallback>
+          </Avatar>
+          <span className="ml-2">{projectManager.name}</span>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "assignedTo",
     header: "Assigned to",
+    cell: ({ row }) => {
+      const assignedTo = row.original.assignedTo;
+
+      return (
+        <div className="flex flex-rom items-center">
+          <Avatar>
+            <AvatarImage
+              src={assignedTo.avatarImageUrl}
+              alt={`${assignedTo.name} profile photo`}
+            />
+            <AvatarFallback
+              className="text-white"
+              style={{
+                backgroundColor:
+                  assignedTo.avatarColor || getRandomAvatarColor(),
+              }}
+            >
+              {getInitials(assignedTo.name)}
+            </AvatarFallback>
+          </Avatar>
+          <span className="ml-2">{assignedTo.name}</span>
+        </div>
+      );
+    },
   },
   {
     accessorKey: "status",

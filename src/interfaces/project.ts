@@ -3,8 +3,10 @@ interface IProject {
   createdAt: string;
   updatedAt: string;
   projectName: string;
-  projectManager: string;
-  assignedTo: string;
   status: string;
   description?: string | undefined;
+  projectManagerId: string;
+  assignedToId: string;
+  projectManager: IUser;
+  assignedTo: IUser;
 }

@@ -35,10 +35,10 @@ const formSchema = z.object({
     message: "Project name must be at least 2 characters.",
   }),
   description: z.string().optional(),
-  projectManager: z.string().min(2, {
+  projectManagerId: z.string().min(2, {
     message: "You must select a project manager",
   }),
-  assignedTo: z.string().min(2, {
+  assignedToId: z.string().min(2, {
     message: "You must select a person",
   }),
   status: z.string().min(2, {
@@ -57,8 +57,8 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
     defaultValues: {
       projectName: initialData?.projectName || "",
       description: initialData?.description || "",
-      projectManager: initialData?.projectManager || "",
-      assignedTo: initialData?.assignedTo || "",
+      projectManagerId: initialData?.projectManagerId || "",
+      assignedToId: initialData?.assignedToId || "",
       status: initialData?.status || statusOptions[0].value,
     },
   });
@@ -71,6 +71,10 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
       project = {
         ...initialData,
         ...values,
+        projectManager: persons.find(
+          (person) => person.id === values.projectManagerId
+        ),
+        assignedTo: persons.find((person) => person.id === values.assignedToId),
         updatedAt: new Date().toISOString(),
       };
     } else {
@@ -79,6 +83,10 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
         id: uuidv4(),
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        projectManager: persons.find(
+          (person) => person.id === values.projectManagerId
+        ),
+        assignedTo: persons.find((person) => person.id === values.assignedToId),
       };
     }
 
@@ -154,7 +162,7 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
           />
           <FormField
             control={form.control}
-            name="projectManager"
+            name="projectManagerId"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Project manager*</FormLabel>
@@ -169,7 +177,7 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
                   </FormControl>
                   <SelectContent>
                     {managers.map((manager) => (
-                      <SelectItem key={manager.name} value={manager.name}>
+                      <SelectItem key={manager.id} value={manager.id}>
                         {manager.name} | {manager.role}
                       </SelectItem>
                     ))}
@@ -182,7 +190,7 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
           />
           <FormField
             control={form.control}
-            name="assignedTo"
+            name="assignedToId"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Assigned To*</FormLabel>
@@ -197,7 +205,7 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
                   </FormControl>
                   <SelectContent>
                     {employees.map((employee) => (
-                      <SelectItem key={employee.name} value={employee.name}>
+                      <SelectItem key={employee.id} value={employee.id}>
                         {employee.name} | {employee.role}
                       </SelectItem>
                     ))}
