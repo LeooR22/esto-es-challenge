@@ -3,6 +3,7 @@
 import { RedirectIconButton } from "@/components/RedirectIconButton";
 import { ProjectList } from "@/components/lists/ProjectList";
 import { ProjectTable } from "@/components/tables/projectTable/project-table";
+import { localStorageProjectKey } from "@/constants/localStorageProjectKey";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { PlusIcon } from "@/icons/PlusIcon";
 import { createContext, useEffect, useState } from "react";
@@ -23,13 +24,16 @@ export default function Page() {
       (project: IProject) => project.id !== id
     );
     setProjects(updatedProjects);
-    localStorage.setItem("projects", JSON.stringify(updatedProjects));
+    localStorage.setItem(
+      localStorageProjectKey,
+      JSON.stringify(updatedProjects)
+    );
   };
 
   useEffect(() => {
     const projects =
       typeof window !== "undefined"
-        ? JSON.parse(localStorage.getItem("projects") || "[]")
+        ? JSON.parse(localStorage.getItem(localStorageProjectKey) || "[]")
         : [];
     setProjects(projects);
     setIsLoading(false);

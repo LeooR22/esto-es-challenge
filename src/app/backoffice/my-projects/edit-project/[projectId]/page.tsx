@@ -2,12 +2,13 @@
 
 import { MutationHeader } from "@/components/MutationHeader";
 import { ProjectForm } from "@/components/forms/ProjectForm";
+import { localStorageProjectKey } from "@/constants/localStorageProjectKey";
 
 export default function Page({ params }: { params: any }) {
   const projectId = params.projectId;
 
   const projects: IProject[] = JSON.parse(
-    localStorage.getItem("projects") || "[]"
+    localStorage.getItem(localStorageProjectKey) || "[]"
   );
 
   const project = projects.find((project: any) => project.id === projectId);

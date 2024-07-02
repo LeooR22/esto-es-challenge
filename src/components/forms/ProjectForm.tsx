@@ -28,6 +28,7 @@ import { FC } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getRandomAvatarColor } from "@/utils/getRandomAvatarColor";
 import { getInitials } from "@/utils/getInitials";
+import { localStorageProjectKey } from "@/constants/localStorageProjectKey";
 
 interface Props {
   initialData?: IProject;
@@ -93,7 +94,9 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
       };
     }
 
-    const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+    const projects = JSON.parse(
+      localStorage.getItem(localStorageProjectKey) || "[]"
+    );
 
     if (initialData) {
       const updatedProjects = projects.filter(
@@ -102,10 +105,16 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
 
       const projectsToSave = [project, ...updatedProjects];
 
-      localStorage.setItem("projects", JSON.stringify(projectsToSave));
+      localStorage.setItem(
+        localStorageProjectKey,
+        JSON.stringify(projectsToSave)
+      );
     } else {
       const projectsToSave = [project, ...projects];
-      localStorage.setItem("projects", JSON.stringify(projectsToSave));
+      localStorage.setItem(
+        localStorageProjectKey,
+        JSON.stringify(projectsToSave)
+      );
     }
 
     // redirect to the projects page
