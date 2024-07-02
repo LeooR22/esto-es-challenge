@@ -18,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { DotsVerticalIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DeleteDialog } from "../tables/projectTable/delete-dialog";
 import { useRouter } from "next/navigation";
@@ -71,6 +71,7 @@ export const ProjectCard: React.FC<Props> = ({
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem onClick={handleGoToEditPage}>
+              <Pencil2Icon className="h-4 w-4 mr-2" />
               Edit
             </DropdownMenuItem>
             <DropdownMenuSeparator />

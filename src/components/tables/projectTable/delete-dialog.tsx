@@ -13,6 +13,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { TrashIcon } from "@radix-ui/react-icons";
 // import { ProjectsContext } from "@/app/backoffice/my-projects/page";
 
 interface Props {
@@ -34,6 +35,7 @@ export const DeleteDialog: FC<Props> = ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <TrashIcon className="h-4 w-4 mr-2" />
           Delete
         </DropdownMenuItem>
       </AlertDialogTrigger>

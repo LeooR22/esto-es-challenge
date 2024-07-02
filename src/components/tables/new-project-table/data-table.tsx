@@ -19,7 +19,7 @@ import { getLocaleDateString } from "@/utils/getLocaleDateString";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getInitials } from "@/utils/getInitials";
 import { Badge } from "@/components/ui/badge";
-import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { DotsVerticalIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { DeleteDialog } from "../projectTable/delete-dialog";
 import { useRouter } from "next/navigation";
@@ -116,6 +116,7 @@ export const DataTable: FC<Props> = ({ projects, deleteProjectById }) => {
                   <DropdownMenuItem
                     onClick={() => handleGoToEditPage(project.id)}
                   >
+                    <Pencil2Icon className="h-4 w-4 mr-2" />
                     Edit
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
