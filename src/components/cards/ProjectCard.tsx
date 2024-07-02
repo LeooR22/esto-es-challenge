@@ -20,7 +20,6 @@ import {
 
 import { DotsVerticalIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DeleteDialog } from "../tables/projectTable/delete-dialog";
 import { useRouter } from "next/navigation";
 import { getInitials } from "@/utils/getInitials";
 import { getRandomAvatarColor } from "@/utils/getRandomAvatarColor";

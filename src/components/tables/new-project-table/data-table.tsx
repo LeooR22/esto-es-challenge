@@ -21,7 +21,6 @@ import { getInitials } from "@/utils/getInitials";
 import { Badge } from "@/components/ui/badge";
 import { DotsVerticalIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
-import { DeleteDialog } from "../projectTable/delete-dialog";
 import { useRouter } from "next/navigation";
 import { DeleteProjectResponsiveMoDal } from "@/components/modal/DeleteProjectResponsiveMoDal";
 
