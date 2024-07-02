@@ -47,6 +47,8 @@ export function DataTable<TData, TValue>({
   });
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
+  console.log({ columnFilters });
+
   const table = useReactTable({
     data,
     columns,
@@ -87,7 +89,7 @@ export function DataTable<TData, TValue>({
             }}
           >
             <SelectTrigger className="w-[60px]">
-              <SelectValue placeholder="Select a fruit" />
+              <SelectValue placeholder="Select a value" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
