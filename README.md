@@ -4,8 +4,15 @@ Se debe realizar el frontend de una plataforma que que tiene como objetivo reali
 Si bien no hay restricción de tiempo, creemos que de 3 a 5 horas es un tiempo razonable para hacerlo calidad.
 
 ## Solución
-🌐[Ver proyecto desplegado]()
+🌐[Ver proyecto desplegado](https://esto-es-challenge-rivas.vercel.app/backoffice/my-projects)
+
+
 🔗[Repositorio](https://github.com/LeooR22/esto-es-challenge)
+
+## Tecnologías utilizadas
+- React
+- Next.js
+- Shadcn/ui
 
 ## Diseño
 Podés encontrar el diseño [acá](https://www.figma.com/file/YLDHikbDgfsZbVdEbO0H6U/Full-Stack-Test-1?node-id=1%3A1701).
