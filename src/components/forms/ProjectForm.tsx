@@ -25,6 +25,9 @@ import { persons } from "@/constants/persons";
 import { statusOptions } from "@/constants/statusOptions";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getRandomAvatarColor } from "@/utils/getRandomAvatarColor";
+import { getInitials } from "@/utils/getInitials";
 
 interface Props {
   initialData?: IProject;
@@ -170,7 +173,7 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
+                  <FormControl className="h-15">
                     <SelectTrigger>
                       <SelectValue placeholder="Select a manager" />
                     </SelectTrigger>
@@ -178,7 +181,26 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
                   <SelectContent>
                     {managers.map((manager) => (
                       <SelectItem key={manager.id} value={manager.id}>
-                        {manager.name} | {manager.role}
+                        <div className="flex flex-row items-center">
+                          <Avatar>
+                            <AvatarImage
+                              src={manager.avatarImageUrl}
+                              alt={`${manager.name} profile photo`}
+                            />
+                            <AvatarFallback
+                              className="text-white"
+                              style={{
+                                backgroundColor:
+                                  manager.avatarColor || getRandomAvatarColor(),
+                              }}
+                            >
+                              {getInitials(manager.name)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <p className="ml-4">
+                            {manager.name} | {manager.role}
+                          </p>
+                        </div>
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -198,7 +220,7 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
+                  <FormControl className="h-15">
                     <SelectTrigger>
                       <SelectValue placeholder="Select a manager" />
                     </SelectTrigger>
@@ -206,7 +228,27 @@ export const ProjectForm: FC<Props> = ({ initialData }) => {
                   <SelectContent>
                     {employees.map((employee) => (
                       <SelectItem key={employee.id} value={employee.id}>
-                        {employee.name} | {employee.role}
+                        <div className="flex flex-row items-center">
+                          <Avatar>
+                            <AvatarImage
+                              src={employee.avatarImageUrl}
+                              alt={`${employee.name} profile photo`}
+                            />
+                            <AvatarFallback
+                              className="text-white"
+                              style={{
+                                backgroundColor:
+                                  employee.avatarColor ||
+                                  getRandomAvatarColor(),
+                              }}
+                            >
+                              {getInitials(employee.name)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <p className="ml-4">
+                            {employee.name} | {employee.role}
+                          </p>
+                        </div>
                       </SelectItem>
                     ))}
                   </SelectContent>

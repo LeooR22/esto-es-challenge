@@ -71,7 +71,7 @@ export const columns: ColumnDef<IProject>[] = [
       const assignedTo = row.original.assignedTo;
 
       return (
-        <div className="flex flex-rom items-center">
+        <div className="flex flex-row items-center">
           <Avatar>
             <AvatarImage
               src={assignedTo.avatarImageUrl}
