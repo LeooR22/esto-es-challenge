@@ -25,7 +25,7 @@ export const ProjectListFilters: FC<Props> = ({
   handleItemsPerPageChange,
 }) => {
   return (
-    <div className="">
+    <div className="md:flex md:flex-row md:justify-between md:items-center md:mb-2">
       <Input
         placeholder="Filter projects..."
         value={filter}
@@ -49,6 +49,7 @@ export const ProjectListFilters: FC<Props> = ({
               <SelectItem value="3">3</SelectItem>
               <SelectItem value="5">5</SelectItem>
               <SelectItem value="7">7</SelectItem>
+              <SelectItem value="10">10</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>

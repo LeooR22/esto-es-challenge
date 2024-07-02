@@ -3,6 +3,7 @@
 import { MutationHeader } from "@/components/MutationHeader";
 import { ProjectForm } from "@/components/forms/ProjectForm";
 import { localStorageProjectKey } from "@/constants/localStorageProjectKey";
+import { notFound } from "next/navigation";
 
 export default function Page({ params }: { params: any }) {
   const projectId = params.projectId;
@@ -14,7 +15,7 @@ export default function Page({ params }: { params: any }) {
   const project = projects.find((project: any) => project.id === projectId);
 
   if (!project) {
-    return <div>Project not found</div>;
+    return notFound();
   }
 
   return (

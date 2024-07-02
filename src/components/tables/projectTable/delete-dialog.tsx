@@ -13,16 +13,19 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { ProjectsContext } from "@/app/backoffice/my-projects/page";
+// import { ProjectsContext } from "@/app/backoffice/my-projects/page";
 
 interface Props {
   projectId: string;
   projectName: string;
+  deleteProjectById: (id: string) => void;
 }
 
-export const DeleteDialog: FC<Props> = ({ projectId, projectName }) => {
-  let { deleteProjectById } = useContext(ProjectsContext);
-
+export const DeleteDialog: FC<Props> = ({
+  projectId,
+  projectName,
+  deleteProjectById,
+}) => {
   const handleDelete = () => {
     deleteProjectById(projectId);
   };
@@ -46,7 +49,7 @@ export const DeleteDialog: FC<Props> = ({ projectId, projectName }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

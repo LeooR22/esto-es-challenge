@@ -50,7 +50,7 @@ export const ListPagination: FC<PaginationProps> = ({
   const displayedPages = getDisplayedPages();
 
   return (
-    <Pagination className="mt-2">
+    <Pagination className="mt-2 md:mt-4">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious

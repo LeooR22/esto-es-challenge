@@ -1,8 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
-import { ProjectCard } from "../cards/ProjectCard";
-
-import { ListPagination } from "./ProjectPaginationList";
-import { ProjectListFilters } from "./ProjectListFilters";
+import { FC, useEffect, useState } from "react";
+import { DataTable } from "./data-table";
+import { ProjectListFilters } from "@/components/lists/ProjectListFilters";
+import { ListPagination } from "@/components/lists/ProjectPaginationList";
 
 interface Props {
   projects: IProject[];
@@ -10,16 +9,16 @@ interface Props {
   deleteProjectById: (id: string) => void;
 }
 
-export const ProjectList: FC<Props> = ({
-  isLoading,
+export const ProjectTable: FC<Props> = ({
   projects,
+  isLoading,
   deleteProjectById,
 }) => {
   const [data, setData] = useState(projects);
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const filteredData = data.filter((project) =>
     project.projectName.toLowerCase().includes(filter.toLowerCase())
@@ -47,7 +46,7 @@ export const ProjectList: FC<Props> = ({
   }, [projects]);
 
   return (
-    <div className="container mx-auto py-5">
+    <>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -62,17 +61,10 @@ export const ProjectList: FC<Props> = ({
                 handleFilterChange={handleFilterChange}
                 handleItemsPerPageChange={handleItemsPerPageChange}
               />
-
-              <div className="grid grid-cols-1 gap-4">
-                {currentData.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    deleteProjectById={deleteProjectById}
-                  />
-                ))}
-              </div>
-
+              <DataTable
+                projects={currentData}
+                deleteProjectById={deleteProjectById}
+              />
               <ListPagination
                 itemsPerPage={itemsPerPage}
                 totalItems={filteredData.length}
@@ -83,6 +75,6 @@ export const ProjectList: FC<Props> = ({
           )}
         </>
       )}
-    </div>
+    </>
   );
 };

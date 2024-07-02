@@ -138,7 +138,11 @@ export const columns: ColumnDef<IProject>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
 
-            <DeleteDialog projectId={projectId} projectName={projectName} />
+            <DeleteDialog
+              projectId={projectId}
+              projectName={projectName}
+              deleteProjectById={() => {}}
+            />
           </DropdownMenuContent>
         </DropdownMenu>
       );

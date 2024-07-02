@@ -30,9 +30,13 @@ import { Badge } from "@/components/ui/badge";
 
 interface Props {
   project: IProject;
+  deleteProjectById: (id: string) => void;
 }
 
-export const ProjectCard: React.FC<Props> = ({ project }) => {
+export const ProjectCard: React.FC<Props> = ({
+  project,
+  deleteProjectById,
+}) => {
   const { projectName, id, assignedTo, createdAt, status } = project;
   const router = useRouter();
 
@@ -71,7 +75,11 @@ export const ProjectCard: React.FC<Props> = ({ project }) => {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
 
-            <DeleteDialog projectId={id} projectName={projectName} />
+            <DeleteDialog
+              projectId={id}
+              projectName={projectName}
+              deleteProjectById={deleteProjectById}
+            />
           </DropdownMenuContent>
         </DropdownMenu>
       </CardHeader>
